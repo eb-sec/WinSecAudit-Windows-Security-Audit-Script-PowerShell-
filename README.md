@@ -1,9 +1,5 @@
 # WinSecAudit
 
-![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B%20%7C%207%2B-5391FE?logo=powershell&logoColor=white)
-![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white)
-![Project Type](https://img.shields.io/badge/Project-Cybersecurity%20Portfolio-111827)
-![Status](https://img.shields.io/badge/Status-Hardened%20Version-16a34a)
 
 WinSecAudit is a PowerShell-based Windows security audit script built for learning, lab use, and portfolio presentation. It reviews common hardening and security-relevant settings on a Windows system and exports the findings to structured CSV and HTML reports.
 
