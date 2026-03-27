@@ -88,8 +88,4 @@ Recommended `.gitignore` entry:
 reports/
 ```
 
----
 
-## Suggested CV description
-
-**WinSecAudit** - Developed a hardened PowerShell-based Windows security audit script with prerequisite checks, structured error handling, safe HTML reporting, and export to CSV and HTML for audit-style documentation.
