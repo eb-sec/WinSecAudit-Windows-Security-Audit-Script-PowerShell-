@@ -1,3 +1,5 @@
+##WinSecAudit 
+
 [CmdletBinding()]
 param(
     [string]$CsvReportPath = ".\reports\WinSecAudit-Report.csv",
@@ -8,6 +10,8 @@ param(
 
 Set-StrictMode -Version Latest
 $findings = New-Object System.Collections.Generic.List[Object]
+
+##Klassen Finding Analyse
 
 function Add-Finding {
     param(
@@ -28,6 +32,8 @@ function Add-Finding {
         Recommendation = $Recommendation
     })
 }
+
+##Farben
 
 function Get-SeverityColor {
     param([string]$Severity)
@@ -55,6 +61,8 @@ function Ensure-OutputDirectory {
     }
 }
 
+##Admincheck
+
 function Test-IsAdministrator {
     try {
         $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -65,6 +73,8 @@ function Test-IsAdministrator {
         return $false
     }
 }
+
+##cmdcheck
 
 function Test-CmdletAvailability {
     param(
@@ -87,6 +97,8 @@ Write-Host 'Starting WinSecAudit (hardened version)...' -ForegroundColor Cyan
 
 Ensure-OutputDirectory -PathValue $CsvReportPath
 Ensure-OutputDirectory -PathValue $HtmlReportPath
+
+##Aufbau FUnktion If-else
 
 if ($PSVersionTable.PSVersion.Major -ge 5) {
     Add-Finding 'Prerequisites' 'PowerShell Version' 'Supported' 'Info' "Detected PowerShell version $($PSVersionTable.PSVersion)." 'No action required.'
@@ -132,6 +144,8 @@ if ($mpAvailable) {
     }
 }
 
+##Firewall
+
 if ($fwAvailable) {
     try {
         $profiles = Get-NetFirewallProfile -ErrorAction Stop
@@ -148,6 +162,8 @@ if ($fwAvailable) {
         Add-Finding 'Network Security' 'Firewall Profiles' 'Error' 'Medium' $_.Exception.Message 'Verify firewall cmdlet availability and permissions.'
     }
 }
+
+##Bitlocker
 
 if ($bitlockerAvailable) {
     try {
@@ -167,6 +183,8 @@ if ($bitlockerAvailable) {
         Add-Finding 'Data Protection' 'BitLocker Status' 'Error' 'Medium' $_.Exception.Message 'Verify BitLocker support and permissions.'
     }
 }
+
+##Patch Management
 
 try {
     $wua = Get-Service -Name 'wuauserv' -ErrorAction Stop
@@ -202,6 +220,8 @@ if ($localGroupAvailable) {
     }
 }
 
+##localuser
+
 if ($localUserAvailable) {
     try {
         $guest = Get-LocalUser -Name 'Guest' -ErrorAction Stop
@@ -229,6 +249,8 @@ try {
 catch {
     Add-Finding 'System Hardening' 'User Account Control (UAC)' 'Error' 'Medium' $_.Exception.Message 'Verify registry access and permissions.'
 }
+
+##SMBv1
 
 if ($featureAvailable) {
     try {
