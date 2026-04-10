@@ -33,7 +33,7 @@ function Add-Finding {
     })
 }
 
-##Farben
+##Farben Kritikalität
 
 function Get-SeverityColor {
     param([string]$Severity)
