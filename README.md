@@ -1,74 +1,74 @@
-# WinSecAudit
+# WinSecAudit von Elias
 
-WinSecAudit ist ein PowerShell-basiertes Windows-Sicherheitsaudit-Skript, das für Lernzwecke, Lab-Umgebungen und die Portfolio-Präsentation entwickelt wurde. Es überprüft gängige Härtungs- und sicherheitsrelevante Einstellungen auf einem Windows-System und exportiert die Ergebnisse in strukturierte CSV- und HTML-Berichte.
-
----
-
-## Sicherheitsorientierte Verbesserungen
-
-Diese gehärtete Version enthält:
-
-- Gezielte `try/catch`-Blöcke anstelle einer globalen Fehlerunterdrückung
-- Voraussetzungsprüfungen für PowerShell-Version, Administratorrechte und Cmdlet-Verfügbarkeit
-- Sichere HTML-Kodierung von Berichtswerten vor der HTML-Ausgabe
-- Optionalen `-RedactSensitiveOutput`-Schalter zum Maskieren von Hostnamen und lokalen Administratornamen
-- Standardmäßige Ausgabe in einen dedizierten `reports`-Ordner
-- Strukturierte Fehlerbefunde statt stiller Fehler
+WinSecAudit is a PowerShell-based Windows security audit script built for learning purposes, lab environments, and portfolio presentation. It checks common hardening and security-relevant settings on a Windows system and exports the results into structured CSV and HTML reports.
 
 ---
 
-## Funktionen
+## Security-Focused Improvements
 
-WinSecAudit prüft aktuell folgende Bereiche:
+This hardened version includes:
 
-- Microsoft Defender-Status und Echtzeitschutz
-- Windows-Firewall-Profilstatus
-- BitLocker-Schutzstatus
-- Konfiguration des Windows-Update-Dienstes
-- Mitgliedschaft in der lokalen Administratorengruppe
-- Gastkonto-Status
-- Benutzerkontensteuerung (UAC)
-- SMBv1-Protokollstatus
-- Fehlgeschlagene Anmeldeereignisse (Event ID 4625)
-- Remotedesktop (RDP)-Status
+- Targeted `try/catch` blocks instead of global error suppression
+- Prerequisite checks for PowerShell version, administrator privileges, and cmdlet availability
+- Safe HTML encoding of report values before HTML output
+- An optional `-RedactSensitiveOutput` switch to mask hostnames and local administrator names
+- Default output to a dedicated `reports` folder
+- Structured error findings instead of silent failures
 
-Jeder Befund enthält:
+---
 
-| Feld | Beschreibung |
+## Features
+
+WinSecAudit currently checks the following areas:
+
+- Microsoft Defender status and real-time protection
+- Windows Firewall profile status
+- BitLocker protection status
+- Windows Update service configuration
+- Local Administrators group membership
+- Guest account status
+- User Account Control (UAC)
+- SMBv1 protocol status
+- Failed logon events (Event ID 4625)
+- Remote Desktop (RDP) status
+
+Each finding includes:
+
+| Field | Description |
 |---|---|
-| **Kategorie** | Themenbereich der Prüfung |
-| **Prüfung** | Name der durchgeführten Kontrolle |
-| **Status** | Ergebnis der Prüfung |
-| **Schweregrad** | Kritisch / Hoch / Mittel / Niedrig |
-| **Details** | Technische Zusatzinformationen |
-| **Empfehlung** | Vorgeschlagene Maßnahme |
+| **Category** | Area of the check |
+| **Check** | Name of the performed control |
+| **Status** | Result of the check |
+| **Severity** | Critical / High / Medium / Low |
+| **Details** | Additional technical information |
+| **Recommendation** | Suggested action |
 
 ---
 
-## Voraussetzungen
+## Requirements
 
-- Windows PowerShell 5.1 oder PowerShell 7+
-- Windows-Endgerät
-- Lokale Berechtigungen zur Abfrage von Systemeinstellungen
-- Administratorrechte für vollständige Ergebnisse empfohlen
+- Windows PowerShell 5.1 or PowerShell 7+
+- Windows endpoint
+- Local permissions to query system settings
+- Administrator privileges recommended for complete results
 
 ---
 
-## Schnellstart
+## Quick Start
 
-Skript mit Standardausgabepfaden ausführen:
+Run the script with default output paths:
 
 ```powershell
 .\WinSecAudit.ps1
 ```
 
-Mit benutzerdefinierten Ausgabepfaden und erweitertem Ereignisprotokoll-Zeitraum:
+Run the script with custom output paths and an extended event log lookback period:
 
 ```powershell
 .\WinSecAudit.ps1 -CsvReportPath ".\reports\WinSecAudit-Report.csv" -HtmlReportPath ".\reports\WinSecAudit-Report.html" -DaysBack 14
 ```
 
-Mit maskierter sensibler Ausgabe:
+Run the script with sensitive output redacted:
 
 ```powershell
 .\WinSecAudit.ps1 -RedactSensitiveOutput
@@ -76,18 +76,15 @@ Mit maskierter sensibler Ausgabe:
 
 ---
 
-## Sicherheitshinweise
+## Security Notes
 
-- Das Skript ist **schreibgeschützt** und nimmt keine Änderungen an Firewall-Regeln, Registrierungswerten, Konten oder Diensten vor.
-- Es schreibt Befunde ausschließlich in CSV- und HTML-Ausgabedateien.
-- Berichte können sensible Audit-Informationen enthalten und sollten bei Erstellung auf echten Systemen **nicht öffentlich committet** werden.
-- Ein `.gitignore`-Eintrag für das `reports/`-Verzeichnis wird empfohlen.
+- The script is **read-only** and does not modify firewall rules, registry values, accounts, or services.
+- It only writes findings to CSV and HTML output files.
+- Reports may contain sensitive audit information and should **not be committed publicly** when generated on real systems.
+- A `.gitignore` entry for the `reports/` directory is recommended.
 
-Empfohlener `.gitignore`-Eintrag:
+Recommended `.gitignore` entry:
 
 ```gitignore
 reports/
 ```
-
-
-
