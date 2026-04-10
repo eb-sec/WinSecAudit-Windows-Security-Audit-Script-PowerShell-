@@ -1,4 +1,4 @@
-# WinSecAudit von Elias
+# WinSecAudit by Elias
 
 WinSecAudit is a PowerShell-based Windows security audit script built for learning purposes, lab environments, and portfolio presentation. It checks common hardening and security-relevant settings on a Windows system and exports the results into structured CSV and HTML reports.
 
@@ -88,3 +88,9 @@ Recommended `.gitignore` entry:
 ```gitignore
 reports/
 ```
+
+## Platform Support
+
+I have tested and designed WinSecAudit for Windows systems only.
+
+It has not been tested on Linux or macOS. In addition, several checks rely on Windows-specific cmdlets, registry paths, services, and event logs, so cross-platform support is currently not intended.
