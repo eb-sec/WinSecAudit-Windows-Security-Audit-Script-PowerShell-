@@ -100,12 +100,16 @@ Ensure-OutputDirectory -PathValue $HtmlReportPath
 
 ##Aufbau FUnktion If-else
 
+##PowerShell
+
 if ($PSVersionTable.PSVersion.Major -ge 5) {
     Add-Finding 'Prerequisites' 'PowerShell Version' 'Supported' 'Info' "Detected PowerShell version $($PSVersionTable.PSVersion)." 'No action required.'
 }
 else {
     Add-Finding 'Prerequisites' 'PowerShell Version' 'Unsupported' 'High' "Detected PowerShell version $($PSVersionTable.PSVersion)." 'Use Windows PowerShell 5.1 or PowerShell 7+.'
 }
+
+##Admin
 
 if (Test-IsAdministrator) {
     Add-Finding 'Prerequisites' 'Administrator Rights' 'Elevated' 'Info' 'Script is running with administrative privileges.' 'No action required.'
